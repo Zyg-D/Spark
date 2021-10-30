@@ -1,38 +1,42 @@
 ```sh
+sudo apt update
+
 echo "\nJAVA install"
-sudo apt install default-jre
-
-echo "\nSCALA"
-cd ~/Downloads
-echo "\nDownloading"
-wget http://www.scala-lang.org/files/archive/scala-2.13.6.deb
-echo "\nDepackaging"
-sudo dpkg -i scala-2.13.6.deb
-
-echo "\nInstalling pip and python3"
-sudo apt install python3-pip
-
-echo "\nInstalling py4j"
-sudo pip install py4j
+sudo apt install default-jre -y
 
 echo "\nSPARK"
 cd ~/Downloads
 echo "\nDownloading"
-wget https://archive.apache.org/dist/spark/spark-3.2.0/spark-3.2.0-bin-hadoop3.2.tgz
+wget -O tgzed.tgz https://downloads.apache.org/spark/spark-3.2.0/spark-3.2.0-bin-hadoop3.2-scala2.13.tgz
 echo "\nUntaring"
-sudo tar -xzf spark-3.2.0-bin-hadoop3.2.tgz
-echo "\nRenaming"
-mv spark-3.2.0-bin-hadoop3.2 spark
-#----------------------------------------------------------------------
+tar -xzf tgzed.tgz
+mv spark-3.2.0-bin-hadoop3.2-scala2.13 spark ############################# Needs change
+echo "\nMove directory"
+sudo mv ~/Downloads/spark/ /usr/lib/
 
-echo "\nAsserting successful installations"
-java -version
-scala -version
-python3 --version
-pip --version
-# No way to visualize if py4j is installed
+echo "\nConfigure spark-env.sh"
+cd /usr/lib/spark/conf/
+echo "\nCopy the template file"
+cp spark-env.sh.template spark-env.sh
+# Append manually
+nano spark-env.sh
+# (without hashtag and space)
+# JAVA_HOME=/usr/lib/jvm/default-java
+# SPARK_WORKER_MEMORY=1g
+# Press: ^x y Enter
 
+echo "\nConfigure .bashrc"
+# Append manually
+nano ~/.bashrc
+# (without hashtag and space)
+# export JAVA_HOME=/usr/lib/jvm/default-java
+# export PATH=$PATH:$JAVA_HOME/bin
+# export SPARK_HOME=/usr/lib/spark
+# export PATH=$PATH:$SPARK_HOME/bin
+# Press: ^x y Enter
+echo "\nLoad the environment variables to the opened session"
+source ~/.bashrc
 
-# Stopping at the end:
-$SHELL
+echo "\nRun Scala shell"
+$SPARK_HOME/bin/spark-shell
 ```
