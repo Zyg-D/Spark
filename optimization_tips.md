@@ -1,4 +1,4 @@
-**`select(col.alias('c')` > `.withColumn('c', c)`**
+**`select(col.alias('c')` > `.withColumn('c', col)`**
 
 Examples and references: https://stackoverflow.com/questions/59789689
 
