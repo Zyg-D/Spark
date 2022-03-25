@@ -1,5 +1,5 @@
 **Spark decimal** is probably not the same as Java BigDecimal, as `scale` in Spark can't be negative.  
-Contains 38 _consecutive_ digits.
+Contains 38 _consecutive_ digits.  
 Limits: _from_ negative 38 digits of 9 (decimal(38, 0)) _to_ positive 38 digits of 9 (decimal(38, 0)).  
 ```none
 decimal(precision, scale)
