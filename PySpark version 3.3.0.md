@@ -10,3 +10,6 @@
    df.transform(func, *args, **kwargs)  # <-- df.transform(func)
    ```
 
+-  ```python
+   F.col('col_name').ilike('%str%')
+   ```
