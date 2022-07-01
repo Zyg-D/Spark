@@ -1,4 +1,12 @@
 -  ```python
+   df = df1.unionByName(df2, allowMissingColumns=True)  # 3.1
+   # 2.3+
+   diff1 = [c for c in df2.columns if c not in df1.columns]
+   diff2 = [c for c in df1.columns if c not in df2.columns]
+   df = df1.select('*', *[F.lit(None).alias(c) for c in diff1]) \
+   .unionByName(df2.select('*', *[F.lit(None).alias(c) for c in diff2]))
+   ```
+-  ```python
    F.expr(r"regexp_extract_all(col, '(\\w+)', 1)")  # 3.1
    ```
 -  ```python
