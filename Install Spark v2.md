@@ -27,4 +27,5 @@ source ~/.bashrc
 
 echo "\nRun Spark shell"
 spark-shell
+
 ```
